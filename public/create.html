@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Create Quiz</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.8/dist/sweetalert2.min.css">
+        <link rel="stylesheet" href="/create.css">
+
+    </head>
+    <body>
+        <div id="main">
+            <div id="root">
+                
+                <div id="container-main">
+                    <br><br><br>
+                    <div id="container-input">
+                        <div class="wrap-input">
+                            <input id="question" class="input-main" type="text" placeholder="Question" />
+                        </div>
+                        <br><br><br><br>
+
+                        <div class="wrap-input">
+                            <input id="answer" class="input-main" type="text" placeholder="Answer" />
+                        </div>
+                        <br><br>
+
+                        <div class="wrap-input">
+                            <input id="option1" class="input-main" type="text" placeholder="First Option" />
+                        </div>
+                        <br><br>
+
+                        <div class="wrap-input">
+                            <input id="option2" class="input-main" type="text" placeholder="Second Option" />
+                        </div>
+                        <br><br>
+                        
+                        <div class="wrap-input">
+                            <input id="option3" class="input-main" type="text" placeholder="Third Option" />
+                        </div>
+
+                    </div>
+                    <div id="container-select">
+                        <select id="difficulty">
+                            <option value="">Difficulty</option>
+                            <option value="Easy">Easy</option>
+                            <option value="Moderate">Moderate</option>
+                            <option value="Hard">Hard</option>
+                        </select>
+                        <div id="container-key">
+                            <input id="key" class="input-key" type="text" placeholder="Creator key" />
+                        </div>
+                        <br><br><br><Br>
+                        <div id="container-submit">
+                            <button id="submit">Submit</button>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div id="status-container">
+                    <div id="status">Idle</div>
+                </div>
+            </div>
+
+        </div>
+        <script src="/easydropdown.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.8/dist/sweetalert2.all.min.js"></script>
+        <script src="/create.js"></script>
+    </body>
+</html>

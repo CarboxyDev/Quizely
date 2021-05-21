@@ -1,0 +1,191 @@
+:root {
+    --light : #fbfcfc;
+    --lightgray : #ecf0f1;
+    --dark : #0c0b0b;
+    --blue: #6495ED;
+    --periwinkle : #CCCCFF;
+    --lightgreen : #2ecc71;
+    --orangered : #FF5733;
+    --blueblack : #17202a ;
+
+}
+
+
+
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    border:none;
+}
+
+body {
+    height:100vh;
+    width:100vw;
+    background:var(--blueblack);
+}
+
+#main {
+    height:100%;
+    width:100%;
+    font-size:16px;
+}
+
+#root {
+    height:100%;
+    width:100%;
+}
+
+#container-main {
+    height:100%;
+    width:70%;
+    position: relative;
+    left:15%;
+
+}
+
+#container-input {
+    display:inline-block;
+    width:80%;
+    position: relative;
+    left:10%;
+}
+
+#container-select {
+    display:inline-block;
+    width:80%;
+    position: relative;
+    left:10%;
+    top:10%;
+}
+
+.input-main {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:1.25rem;
+    height:5.6vh;
+    width:95%;
+    border-radius: 5px;
+    background:  #202e3d;
+    color:var(--light);
+    position: relative;
+    left:2.5%;
+}
+
+#question {
+    font-size:1.3rem;
+    height:6.25vh;
+}
+
+
+
+
+.wrap-input {
+    height:100%;
+    width:100%;
+    background:  #202e3d;
+}
+
+
+input:focus {
+    outline:none;
+}
+
+/* <select> */
+#difficulty {
+    padding:0.6vh;
+    height:4vh;
+    font-size:1.1rem;
+    display:inline-block;
+    color:var(--dark);
+    font-family: Arial, Helvetica, sans-serif;
+}
+#container-key {
+    float:right;
+    width:20%;
+    height:4vh;
+    font-size:1rem;
+}   
+#key {
+    width:100%;
+    height:100%;
+    font-size:1.1rem;
+    color:var(--dark);
+    background:var(--light);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#container-submit {
+    height:100%;
+    width:100%;
+}
+#submit {
+    font-size:1.3rem;
+    background:var(--lightgreen);
+    border:1px solid var(--lightgreen);
+    color:var(--light);
+    min-height:6.5vh;
+    min-width:20%;
+    border-radius: 25px;
+    position: relative;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+#submit:hover {
+    background:transparent;
+    border:1px solid var(--lightgreen);
+    color:var(--lightgreen);
+}
+
+
+#status-container {
+    height:5vh;
+    width:15vw;
+    position:absolute;
+    left:0%;
+    top:0%;
+}
+
+#status {
+    font-size:1.4vw;
+    color:#c8bebe;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Sweetalert Start */
+
+.swal2-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:1.5rem;
+    color:#fff;
+}
+.swal2-icon-info {
+    color:#fff;
+}
+.swal2-icon-error {
+    color:#fff;
+}
+
+.alert-error {
+    background:var(--orangered) !important;
+}
+.alert-success {
+    background:var(--lightgreen) !important;
+}
+
+/* Sweetalert End */
