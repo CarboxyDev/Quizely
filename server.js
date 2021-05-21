@@ -10,7 +10,7 @@ var server;
 
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 2003;
 
 
 const DATABASE = {
