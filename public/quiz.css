@@ -1,0 +1,219 @@
+:root {
+    --light : #eff5f5;
+    --lightgray : #ccd5d7;
+    --dark : #0c0b0b;
+    --lightblue: #6495ED;
+    --periwinkle : #CCCCFF;
+    --lightgreen : #2ecc71;
+    --orangered : #FF5733;
+    --blueblack : #17202a;
+    --background-color :  #1c2833;
+    --blue : #2973bd;
+    --red : #f21e1e;
+    --purple : #7917ee;
+    --orange : #ec4e10;
+    --pale-blue : #3c86cf;
+    --pale-red : #e73535;
+    --pale-purple : #812ce9;
+    --pale-orange : #eb5e26;
+    --yellow : #f5ed06;
+
+
+}
+
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    border:none;
+}
+
+body {
+    background:var(--background-color);
+    height:100vh;
+    width:100vw;
+}
+
+#main {
+    height:100%;
+    width:100%;
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+    display:grid;
+    grid-template-rows : 10% 60% 30%;
+}
+#container-top {
+    height:100%;
+    width:100%;
+}
+
+
+#container-bottom {
+    height:100%;
+    width:100%;
+}
+
+#container-options {
+    height:100%;
+    width:70%;
+    position: relative;
+    left:15%;
+    display: grid;
+    grid-template-rows: 50% 50%;
+}
+
+#container-options-top {
+    height:100%;
+    width:100%;
+    display:grid;
+    grid-template-columns: 50% 50%;
+}
+
+#container-options-bottom {
+    height:100%;
+    width:100%;
+    display:grid;
+    grid-template-columns: 50% 50%;
+}
+
+
+#container-option-1 {
+    background:var(--blue);
+    border-right:2px solid white;
+    border-bottom:2px solid white;
+}
+
+#container-option-2 {
+    background:var(--red);
+    border-left:2px solid white;
+    border-bottom:2px solid white;
+}
+
+#container-option-3 {
+    background:var(--purple);
+    border-right:2px solid white;
+    border-top:2px solid white;
+}
+
+#container-option-4 {
+    background:var(--orange);
+    border-left:2px solid white;
+    border-top:2px solid white;
+}
+
+
+
+#title-container {
+    
+}
+#title {
+    font-size:5.1vh;
+    color:#3a85db;
+    font-family: Jost,'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+
+
+#question-container {
+    height:100%;
+}
+
+
+#question {
+    display:inline-block;
+    font-family: Roboto,Arial, Helvetica, sans-serif;
+    color:var(--light);
+    font-size:3.5vh;
+    position: relative;
+    top:5%;
+}
+
+
+
+#container-top {
+    height:100%;
+    width:100%;
+    display:grid;
+    grid-template-columns: 15% 70% 15%;
+}
+
+
+#container-top-left {
+
+}
+.fa-home {
+    color:var(--lightgray);
+    font-size:5vh;
+    position:relative;
+    left:2%;
+    top:10%;
+}
+.fa-home:hover {
+    color:#f06363;
+    font-size:5.25vh;
+}
+
+
+
+#container-middle {
+    height:100%;
+    width:100%;
+    display:grid;
+    grid-template-columns: 15% 70% 15%;
+}
+
+#container-middle-center {
+}
+
+
+
+.option-container {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.option {
+    font-size:3.25vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color:var(--light );
+
+}
+
+#difficulty-container {
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    position:relative;
+    top:10%;
+}
+
+#difficulty {
+    font-size:3.7vh;
+    color:var(--lightgray);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+
+#container-option-1:hover {
+    background-color: var(--pale-blue);
+}
+
+#container-option-2:hover {
+    background-color: var(--pale-red);
+}
+
+#container-option-3:hover {
+    background-color: var(--pale-purple);
+}
+
+#container-option-4:hover {
+    background-color: var(--pale-orange);
+}

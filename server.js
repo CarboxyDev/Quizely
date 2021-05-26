@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const {v4:uuid} = require('uuid');
 const path = require('path');
 const auth = require('./auth');
+const utils = require('./utils');
 require('dotenv').config();
 var server;
 
@@ -71,8 +72,6 @@ app.post('/create-quiz',(req,res) => {
                 author:KEYS[data.key]
             });
  
-
-                
             quizData.save()
                 .then(result => {
 
@@ -119,13 +118,71 @@ app.post('/create-quiz',(req,res) => {
 
 
 
+app.get('/fetch/:amt',(req,res) => {
+    let amount = req.params.amt;
+    console.log(`[-]GET : /fetch/${amount}`);
+
+    QuizData.countDocuments().exec((error,count) => {
+        let randList = utils.generateRandomList(5,count);
+        let collections = [];
+        let c = 0;
+        for (x of randList){
+            QuizData.findOne().skip(x).exec((error,data) => {
+                c++;
+                collections.push(data);
+                if (c == amount){
+                
+                    res.send(collections);
+                }
+
+            });
+            
+
+
+        }
+        
+        
+    });
+    
+
+    
+
+});
+
+
+
+
+
+
+
+
+
+
+
 
 app.get('/create-quiz',(req,res) => {
     res.sendFile('create.html',{root:PATH.public});
     console.log('[-] GET : create');
 });
 
+app.get('/quiz',(req,res) => {
+    res.sendFile('quiz.html',{root:PATH.public});
+    console.log('[-] GET : quiz');
+}); 
+
+app.get('/utils/db-question-count',(req,res) => {
+    QuizData.countDocuments().exec((error,count) => {
+        res.json({'questionCount':count});
+    });
+});
+
+app.get('/questions-exhausted',(req,res) => {
+    res.sendFile('questions-exhausted.html',{root:PATH.public});
+    console.log('[-] GET : questions-exhausted');    
+});
+
+
 app.get('/',(req,res) => {
-    res.send('Welcome to Quizly! Site under development<br><br><a href="/create-quiz">Create Quiz</a>');
-    console.log('[-] GET : index');
+    res.send('Welcome to Quizly! Site under development<br><br><a href="/create-quiz">Create Quiz</a><br><br><a href="/quiz">Play quiz</a><br>');
+    console.log('[-] GET : home');
 });
