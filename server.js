@@ -120,7 +120,7 @@ app.post('/create-quiz',(req,res) => {
 
 app.get('/fetch/:amt',(req,res) => {
     let amount = req.params.amt;
-    console.log(`[-]GET : /fetch/${amount}`);
+    console.log(`[-] GET : /fetch/${amount}`);
 
     QuizData.countDocuments().exec((error,count) => {
         let randList = utils.generateRandomList(5,count);

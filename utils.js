@@ -9,6 +9,6 @@ exports.generateRandomList = (amount,max) => {
             list.push(rand);
         }
     }
-    console.log(list);
+
     return list;
 };
