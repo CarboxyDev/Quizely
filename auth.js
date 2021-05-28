@@ -13,7 +13,7 @@ exports.checkQuizItem = (data) => {
         return [false,'Question should be longer than 10 characters'];
     }
     else if (!["Easy","Moderate","Hard"].includes(data.difficulty)){
-        return [false,'You must specify a difficulty level for the quiz item'];
+        return [false,'You must follow the convention for question difficulty'];
     }
     else if (data.answer.length == 0){
         return [false,'You forgot to specify an answer'];

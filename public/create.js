@@ -1,31 +1,31 @@
 let submitBtn = document.querySelector('#submit');
-let questionInput = document.querySelector('#question');
-let answerInput = document.querySelector('#answer');
-let opt1Input = document.querySelector('#option1');
-let opt2Input = document.querySelector('#option2');
-let opt3Input = document.querySelector('#option3');
-let difficultySelect = document.querySelector('#difficulty');
-let keyInput = document.querySelector('#key');
 
-let status = document.querySelector('#status');
+let input = {
+    question:document.querySelector('#question'),
+    answer:document.querySelector('#answer'),
+    option1:document.querySelector('#option1'),
+    option2:document.querySelector('#option2'),
+    option3:document.querySelector('#option3'),
+    difficulty:document.querySelector('#difficulty'),
+    key:document.querySelector('#key'),
+}
+
 
 submitBtn.addEventListener('click',() => {
-    
 
     let sendData = {
-        question:questionInput.value,
-        answer:answerInput.value,
-        option1:opt1Input.value,
-        option2:opt2Input.value,
-        option3:opt3Input.value,
-        difficulty:difficultySelect.value,
-        key:keyInput.value
+        question:input.question.value,
+        answer:input.answer.value,
+        option1:input.option1.value,
+        option2:input.option2.value,
+        option3:input.option3.value,
+        difficulty:adjustDifficultyInput(input.difficulty.value),
+        key:input.key.value
     }
 
 
-
-
     let url = '/create-quiz';
+
     let options = {
         method:'POST',
         body: JSON.stringify(sendData),
@@ -39,10 +39,9 @@ submitBtn.addEventListener('click',() => {
     fetch(url,options)
         .then(res => res.json())
         .then(data => {
-            console.log('POST : '+url)
             let serverResponse = data.message;
-            if (data.success == true){
-                console.log('[create-quiz] Published a quiz item');
+            if (data.success){
+                console.log('[SERVER] Published a quiz item');
                 clearInputs();
             }
             alertUser(serverResponse,success=data.success);
@@ -50,7 +49,7 @@ submitBtn.addEventListener('click',() => {
         })
         .catch(error => {
             console.log('ERROR : '+error);
-            alertUser('Error in sending fetch request',success=false);
+            alertUser('[CLIENT] Error in sending POST request',success=false);
         })
     
 
@@ -59,20 +58,46 @@ submitBtn.addEventListener('click',() => {
 
 function clearInputs(){
 
-    questionInput.value = '';
-    answerInput.value = '';
-    opt1Input.value = '';
-    opt2Input.value = '';
-    opt3Input.value = '';
-    difficulty.value = '';
+    input.question.value = '';
+    input.answer.value = '';
+    input.option1.value = '';
+    input.option2.value = '';
+    input.option3.value = '';
+    input.difficulty.value = '';
 
 }
+
+function adjustDifficultyInput(diff){
+    diff = diff.charAt(0).toUpperCase() + diff.substring(1,diff.length);
+    if (diff == 'Medium'){
+        diff = 'Moderate';
+    }
+    if (diff == 'Tough'){
+        diff = 'Hard'
+  s  }
+    if (diff == 'E'){
+        diff = 'Easy';
+    }
+    if (diff == 'M'){
+        diff = 'Moderate';
+    }
+    if (diff == "H"){
+        diff = 'Hard';
+    }
+
+    return diff;
+
+}
+
+
+
+
 
 let alertPopup = Swal.mixin({
     toast:true,
     position:'top-right',
     showConfirmButton:false,
-    timer:4000,
+    timer:3500,
     timerProgressBar:false
     
 }); 
@@ -93,46 +118,30 @@ function alertUser(title,success=false){
             'popup':alertClass
         }
     });
-    document.querySelector('.swal2-title').style.color = "#fff";
+    document.querySelector('.swal2-title').style.color = '#fff';
 }
 
 
 
+function difficultyInfo(){
 
+    let html = `<br>
+    Difficulty can be of 3 types :<br>Easy, Medium and Hard.<br><br>
+    The difficulty input is case-insensitive.
 
-// Status related
+    
+    <br>`;
 
-questionInput.addEventListener('focus',() => {
-    status.innerText = 'Typing question';
-});
+    Swal.fire({
+        title:'Difficulty',
+        html:html,
+        confirmButtonText:"Alright",
+        icon:'info',
+        showConfirmButton:false,
+        showCloseButton:true,
+        toast:true
+    })
 
-answerInput.addEventListener('focus',() => {
-    status.innerText = 'Typing answer';
-});
-
-opt1Input.addEventListener('focus',() => {
-    status.innerText = 'Creating option 1';
-});
-
-opt2Input.addEventListener('focus',() => {
-    status.innerText = 'Creating option 2';
-});
-
-opt3Input.addEventListener('focus',() => {
-    status.innerText = 'Creating option 3';
-});
-
-difficulty.addEventListener('focus',() => {
-    status.innerText = 'Setting difficulty';
-});
-
-key.addEventListener('focus',() => {
-    status.innerText = 'Setting creator key';
-});
-
-submit.addEventListener('focus',() => {
-    status.innerText = 'Submitting quiz';
-});
-
+}
 
 

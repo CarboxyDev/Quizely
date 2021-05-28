@@ -66,9 +66,6 @@ function loadQuestions(){
     if (exhaustedQuestions.length == totalQuestionsInDB){
         questionsExhausted();
     }
-
-
-
     if (QUESTIONDATA.length == 0){
         fetchQuestions(5);
         return true;
@@ -153,9 +150,9 @@ function wrongAnswer(optionNum){
     currentElem.id = "";
 
     let delay1 = setInterval(() => {
-        showAnswer(optionNum,currentElem);
         clearInterval(delay1);
-
+        showAnswer(optionNum,currentElem);
+        
 
     },1000);
 
@@ -170,14 +167,14 @@ function showAnswer(wrongAnswerOptionNum,wrongAnswerElem){
     currentElem.style.backgroundColor = color.success;
 
     let delay2 = setInterval(() => {
-
+        clearInterval(delay2);
         // give its id back for future :hover to take place normally
         
         wrongAnswerElem.id = `container-option-${wrongAnswerOptionNum}`;
 
         resetOptionColors();
         loadQuestions();
-        clearInterval(delay2);
+        
     },2500);
 
 }
