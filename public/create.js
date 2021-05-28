@@ -145,3 +145,51 @@ function difficultyInfo(){
 }
 
 
+
+// to make it easier for the quiz creator to navigate the inputs
+// only need to press ENTER to go to next input instead of using 
+// mouse and clicking on it.
+function shiftFocus(){
+    let currentFocus = document.activeElement;
+    let dataShift = currentFocus.getAttribute('data-shift');
+    if (dataShift == null){
+        let toFocusElem = document.querySelector(`[data-shift="0"]`);
+        toFocusElem.focus();
+    }
+    else {
+        dataShift = parseInt(dataShift);
+        if (dataShift >= 5){
+            dataShift = 0;
+        }
+        else {
+            dataShift += 1;
+        }
+        let toFocusElem = document.querySelector(`[data-shift='${dataShift}']`);
+        toFocusElem.focus();
+    }
+
+
+}
+
+
+
+document.addEventListener('keyup',(e) => {
+    e.preventDefault();
+    // 13 ---> ENTER KEY
+    if (e.key === 'Enter'){ 
+        shiftFocus();
+    };
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
