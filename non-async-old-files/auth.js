@@ -2,19 +2,17 @@ const Creator = require('./models/creator');
 const { resolveSoa } = require('dns');
 
 
-exports.checkCreatorKey = async(data) => {
+exports.checkCreatorKey = (data) => {
 
-    let creator = await Creator.findOne({key:data.key}).exec();
-    if (creator == null || creator == undefined){
-        return false;
+    if (Object.keys(KEYS).includes(data.key)){
+        return true;
     }
-    return creator;
-
+    return false;
     
 };
 
 
-exports.checkQuizItem = async(data) => {
+exports.checkQuizItem = (data) => {
     if (data.question.length < 10){
         return [false,'Question should be longer than 10 characters'];
     }
@@ -40,7 +38,7 @@ exports.checkQuizItem = async(data) => {
 };
 
 
-exports.alterQuizItem = async(data) => {
+exports.alterQuizItem = (data) => {
 
     return data;
 };

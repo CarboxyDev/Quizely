@@ -5,7 +5,6 @@ const {v4:uuid} = require('uuid');
 const path = require('path');
 const auth = require('./auth');
 const utils = require('./utils');
-const db = require('./db');
 require('dotenv').config();
 var server;
 
@@ -19,12 +18,16 @@ const DATABASE = {
     url:process.env.DB_URL
 }
 
+global.KEYS = {};
+
 mongoose.connect(DATABASE.url,{useNewUrlParser:true,useUnifiedTopology:true})
     .then((result) => {
         console.log('[+] Connected to database');
         server = app.listen(PORT,() => {
             console.log('[+] Server Online');
         });
+        KEYS[process.env.CREATOR_1] = 'wraithM17';
+        KEYS[process.env.CREATOR_2] = 'Anonymous'; 
 
     })
     .catch((error) => {
@@ -51,14 +54,14 @@ const QuizData = require('./models/quizdata');
 const { resolveSoa } = require('dns');
 
 
-app.post('/create-quiz',async(req,res) => {
-    let data = req.body;
-    let checkCreatorKey = await auth.checkCreatorKey(data);
-    
-    if (checkCreatorKey){
-        let checkQuiz = await auth.checkQuizItem(data);
-        if (checkQuiz[0]){
-            data = await auth.alterQuizItem(data);
+
+app.post('/create-quiz',(req,res) => {
+   let data = req.body;
+   
+    if (auth.checkCreatorKey(data)){
+        let checkQuiz = auth.checkQuizItem(data);
+        if (checkQuiz[0] == true){
+            data = auth.alterQuizItem(data);
 
             let quizData = new QuizData({
                 difficulty:data.difficulty,
@@ -67,46 +70,53 @@ app.post('/create-quiz',async(req,res) => {
                 option1:data.option1,
                 option2:data.option2,
                 option3:data.option3,
-                author:checkCreatorKey.creatorName
+                author:KEYS[data.key]
             });
-
+ 
             quizData.save()
                 .then(result => {
-                    console.log('[-][create-quiz] New quiz item created');
-                    res.json({
+
+                    console.log('[-][create-quiz] QUIZ : New item created');
+                    res.send({
                         'message':'Published submitted quiz item',
                         'success':true,
                         'validKey':true
                     });
+
+                    
                 })
                 .catch(error => {
-                    console.log(error);
+ 
                     console.log('[x][create-quiz] Error in publishing a quiz item to database');
-                    res.json({
+                    res.send({
                         'message':'Database error in publishing quiz item',
                         'success':false,
                         'validKey':true
                     });
-                })
+
+                });
+
 
         }
-        else if (!checkQuiz[0]){
+        else {
             let reason = checkQuiz[1];
             res.send({
                 'message':reason,
                 'success':false,
                 'validKey':true
             });
-        }
+        };
+
+
     }
     else {
-        console.log('[x][create-quiz] Someone used an invalid creator key');
-        res.json({
+        console.log('[x][create-quiz] Creator key invalid');
+        res.send({
             'message':'Creator key invalid',
             'success':false,
             'validKey':false
         });
-    }
+    };
 
 });
 
@@ -131,34 +141,19 @@ app.get('/fetch/:amt',(req,res) => {
                 }
 
             });
+            
+
 
         }
+        
+        
     });
     
-});
 
-
-app.get('/creator/new',async (req,res) => {
-    console.log('[-] GET : /creator/new');
-    let key = req.query.key;
-    let author = req.query.author;
-
-    if (key && author){
-        console.log(`New Creator : [+] ${key} : ${author}`);
-        let sendObj = {
-            key:key,
-            creatorName:author
-        }
-        let newCreator = await db.newCreator(sendObj);
-        sendObj['success'] = newCreator;
-        res.json(sendObj);    
-    }
-    else {
-        res.send('Invalid query');
-    }
-
+    
 
 });
+
 
 
 
