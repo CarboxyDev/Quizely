@@ -138,10 +138,12 @@ function keyStatus(type){
     if (type == "success"){
         keyIcon.classList = []
         keyIcon.classList.add('fas','fa-check');
+        keyIcon.title = 'Key is working';
     }
     if (type == "error"){
         keyIcon.classList = [];
         keyIcon.classList.add('fas','fa-times');
+        keyIcon.title = 'Key is not working';
     }
 }
 

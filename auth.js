@@ -1,3 +1,7 @@
+const Creator = require('./models/creator');
+const { resolveSoa } = require('dns');
+
+
 exports.checkCreatorKey = (data) => {
 
     if (Object.keys(KEYS).includes(data.key)){
