@@ -79,7 +79,8 @@ app.post('/create-quiz',(req,res) => {
                     console.log('[-][create-quiz] QUIZ : New item created');
                     res.send({
                         'message':'Published submitted quiz item',
-                        'success':true
+                        'success':true,
+                        'validKey':true
                     });
 
                     
@@ -89,7 +90,8 @@ app.post('/create-quiz',(req,res) => {
                     console.log('[x][create-quiz] Error in publishing a quiz item to database');
                     res.send({
                         'message':'Database error in publishing quiz item',
-                        'success':false
+                        'success':false,
+                        'validKey':true
                     });
 
                 });
@@ -100,7 +102,8 @@ app.post('/create-quiz',(req,res) => {
             let reason = checkQuiz[1];
             res.send({
                 'message':reason,
-                'success':false
+                'success':false,
+                'validKey':true
             });
         };
 
@@ -110,7 +113,8 @@ app.post('/create-quiz',(req,res) => {
         console.log('[x][create-quiz] Creator key invalid');
         res.send({
             'message':'Creator key invalid',
-            'success':false
+            'success':false,
+            'validKey':false
         });
     };
 

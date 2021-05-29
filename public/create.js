@@ -40,17 +40,26 @@ submitBtn.addEventListener('click',() => {
         .then(res => res.json())
         .then(data => {
             let serverResponse = data.message;
-            if (data.success){
+            let isKeyValid = data.validKey;
+
+            if (data.success == true){
                 console.log('[SERVER] Published a quiz item');
                 clearInputs();
+            };
+            if (isKeyValid){
+                keyStatus('success');
             }
+            else if (!isKeyValid){
+                keyStatus('error');
+            };
             alertUser(serverResponse,success=data.success);
+
 
         })
         .catch(error => {
             console.log('ERROR : '+error);
-            alertUser('[CLIENT] Error in sending POST request',success=false);
-        })
+            alertUser('Error in sending POST request',success=false);
+        });
     
 
 });
@@ -109,7 +118,9 @@ function alertUser(title,success=false){
     if (success == true){
         icon='success';
         alertClass = 'alert-success';
+        
     }
+
 
     alertPopup.fire({
         title:title,
@@ -120,6 +131,23 @@ function alertUser(title,success=false){
     });
     document.querySelector('.swal2-title').style.color = '#fff';
 }
+
+
+function keyStatus(type){
+    let keyIcon = document.querySelector('#key-icon');
+    if (type == "success"){
+        keyIcon.classList = []
+        keyIcon.classList.add('fas','fa-check');
+    }
+    if (type == "error"){
+        keyIcon.classList = [];
+        keyIcon.classList.add('fas','fa-times');
+    }
+}
+
+
+
+
 
 
 
