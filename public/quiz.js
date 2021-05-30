@@ -1,3 +1,4 @@
+
 let container = {
     option1:document.querySelector('#container-option-1'),
     option2:document.querySelector('#container-option-2'),
@@ -13,13 +14,15 @@ let quiz = {
     option4:document.querySelector('#option-4')
 }
 
+// for using CSS variables
+const style = getComputedStyle(document.body);
 let color = {
-    success:'#4BB543',
-    error:'#fa0707',
-    option1:'#2973bd',
-    option2:'#c92525',
-    option3:'#7917ee',
-    option4:'#ec4e10'
+    success:style.getPropertyValue('--success'),
+    error:style.getPropertyValue('--error'),
+    option1:style.getPropertyValue('--blue'),
+    option2:style.getPropertyValue('--red'),
+    option3:style.getPropertyValue('--purple'),
+    option4:style.getPropertyValue('--orange'),
 }
 
 
@@ -144,7 +147,9 @@ function correctAnswer(optionNum){
 function wrongAnswer(optionNum){
     console.log('[CLIENT] : Wrong answer');
     let currentElem = document.querySelector(`#container-option-${optionNum}`);
-
+    // im a stupid retard and forgot i could just assign a class to it
+    // temporarily which would already have its css in the style file
+    // fml. i cant even.
     currentElem.style.backgroundColor = color.error;
     // to not add :hover effect to the option when its red/error/wrong
     currentElem.id = "";
