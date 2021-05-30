@@ -28,20 +28,23 @@ mongoose.connect(DATABASE.url,{useNewUrlParser:true,useUnifiedTopology:true})
 
     })
     .catch((error) => {
-        console.log('[-] Failed connecting to database');
         console.log(error);
+        console.log('[-] Failed connecting to database');
+        
     });
 
 
 
 const PATH = {
     public:path.join(__dirname,'public'),
-    routes:path.join(__dirname,'routes')
+    routes:path.join(__dirname,'routes'),
+    error404:path.join(__dirname,'404'),
 };
 
 
 app.use(express.json());
 app.use(express.static(PATH.public));
+app.use(express.static(PATH.error404));
 
 
 
@@ -59,8 +62,7 @@ app.post('/create-quiz',async(req,res) => {
         let checkQuiz = await auth.checkQuizItem(data);
         if (checkQuiz[0]){
             data = await auth.alterQuizItem(data);
-
-            let quizData = new QuizData({
+            let quizObj = {
                 difficulty:data.difficulty,
                 question:data.question,
                 answer:data.answer,
@@ -68,26 +70,23 @@ app.post('/create-quiz',async(req,res) => {
                 option2:data.option2,
                 option3:data.option3,
                 author:checkCreatorKey.creatorName
-            });
+            }
 
-            quizData.save()
-                .then(result => {
-                    console.log('[-][create-quiz] New quiz item created');
-                    res.json({
-                        'message':'Published submitted quiz item',
-                        'success':true,
-                        'validKey':true
-                    });
-                })
-                .catch(error => {
-                    console.log(error);
-                    console.log('[x][create-quiz] Error in publishing a quiz item to database');
-                    res.json({
-                        'message':'Database error in publishing quiz item',
-                        'success':false,
-                        'validKey':true
-                    });
-                })
+            let newQuizItem = db.createQuiz(quizObj);
+            if (newQuizItem){
+                res.json({
+                    'message':'Published submitted quiz item',
+                    'success':true,
+                    'validKey':true
+                });
+            }
+            else if (!newQuizItem){
+                res.json({
+                    'message':'Database error in publishing quiz item',
+                    'success':false,
+                    'validKey':true
+                });
+            }
 
         }
         else if (!checkQuiz[0]){
@@ -114,26 +113,30 @@ app.post('/create-quiz',async(req,res) => {
 
 
 app.get('/fetch/:amt',(req,res) => {
-    let amount = req.params.amt;
-    console.log(`[-] GET : /fetch/${amount}`);
+    let amount = parseInt(req.params.amt);
+    
+    if ([5,10,20].includes(amount)){
 
-    QuizData.countDocuments().exec((error,count) => {
-        let randList = utils.generateRandomList(5,count);
-        let collections = [];
-        let c = 0;
-        for (x of randList){
-            QuizData.findOne().skip(x).exec((error,data) => {
-                c++;
-                collections.push(data);
-                if (c == amount){
-                
-                    res.send(collections);
-                }
+        console.log(`[-] GET : /fetch/${amount}`);
+        QuizData.countDocuments().exec((error,count) => {
+            let randList = utils.generateRandomList(5,count);
+            let collections = [];
+            let c = 0;
+            for (x of randList){
+                QuizData.findOne().skip(x).exec((error,data) => {
+                    c++;
+                    collections.push(data);
+                    if (c == amount){
+                    
+                        res.send(collections);
+                    }
 
-            });
+                });
 
-        }
-    });
+            }
+        });
+    }
+
     
 });
 
@@ -194,5 +197,11 @@ app.get('/questions-exhausted',(req,res) => {
 
 app.get('/',(req,res) => {
     res.send('Welcome to Quizly! Site under development<br><br><a href="/create-quiz">Create Quiz</a><br><br><a href="/quiz">Play quiz</a><br>');
-    console.log('[-] GET : home');
+
 });
+
+app.use('*',(req,res) => {
+    res.sendFile('404.html',{root:PATH.error404});
+
+});
+

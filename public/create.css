@@ -7,8 +7,15 @@
     --periwinkle : #CCCCFF;
     --lightgreen : #2ecc71;
     --orangered : #FF5733;
-    --blueblack : #17202a ;
+    --blueblack : #17202a;
 
+    --bg-dark : hsl(240, 12%, 11%);
+    --btn-dark : #c449c2;
+    --input-dark :hsl(240, 13%, 15%);
+    --label-dark : hsl(230, 14%, 13%);
+    --input2-dark :hsl(240, 13%, 20%);
+    --label2-dark:hsl(240, 9%, 13%);
+    --icon-dark : hsl(240, 9%, 13%);
 }
 
 * {
@@ -22,7 +29,7 @@
 body {
     height:100vh;
     width:100vw;
-    background:#333c53;
+    background:var(--bg-dark);
     font-family: Roboto,Arial,Helvetica, sans-serif;
 }
 
@@ -77,27 +84,27 @@ body {
     display:grid;
     grid-template-columns: 20% 70%;
     grid-column-gap: 5%;
-    background:#2F3A4A;
+    background:var(--input-dark);
     border-radius:8px;
 
 }
 
 .label {
     font-family: Roboto,Arial, Helvetica, sans-serif;
-    font-size:1.25rem;
+    font-size:1.1rem;
     color:#fafafa;
     display:flex;
     align-items: center;
-    background:hsl(210, 22%, 23%);
+    background:var(--label-dark);
 }
 
 .label-2 {
     font-family: Roboto,Arial, Helvetica, sans-serif;
-    font-size:1.25rem;
+    font-size:1.1rem;
     color:#fafafa;
     display:flex;
     align-items: center;
-    background:hsl(211, 22%, 26%);
+    background:var(--label2-dark);
 }
 
 
@@ -123,37 +130,16 @@ body {
 
 }
 
-
-
-#container-key {
+#container-key,#container-difficulty {
     height:100%;
     display:grid;
     grid-column-gap: 5%;
     grid-template-columns: 20% 60% 10%;
-    background:#374356;
+    background:var(--input2-dark);
     border-radius:8px;
 }
 
-#container-difficulty {
-    height:100%;
-    display:grid;
-    grid-column-gap:5%;
-    grid-template-columns: 20% 60% 10%;
-    background-color: #374356;
-    border-radius: 8px;
-}
-
-
-#key {
-    height:100%;
-    width:100%;
-    background:transparent;
-    font-size:1.25rem;
-    color:#69849A;
-    font-family: Roboto,Arial, Helvetica, sans-serif;
-}
-
-#difficulty {
+#key,#difficulty {
     height:100%;
     width:100%;
     background:transparent;
@@ -172,25 +158,16 @@ body {
 
 
 
-.info {
+.info,.key-status {
     display: flex;
     align-items:center;
     justify-content: center;
     color:#eeebeb;
-    background:#2e3746;
+    background:var(--icon-dark);
+    font-size:1.5rem;
 }
 .info:hover {
     background:transparent;
-}
-
-
-.key-status {
-    display:flex;
-    align-items:center;
-    justify-content: center;
-    color:#eeebeb;
-    background-color: #2e3746;
-    font-size:1.5rem;
 }
 
 .fa-times {
@@ -213,7 +190,7 @@ body {
 #submit {
     height:100%;
     width:100%;
-    background:#dd505e;
+    background:var(--btn-dark);
     color:#fff;
     font-size:1.3rem;
     font-family:Roboto,Arial,Helvetica,sans-serif;
