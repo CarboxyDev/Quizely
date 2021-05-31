@@ -1,20 +1,10 @@
-const Creator = require('./models/creator');
-const { resolveSoa } = require('dns');
-
-
-exports.checkCreatorKey = async(data) => {
-
-    let creator = await Creator.findOne({key:data.key}).exec();
-    if (creator == null || creator == undefined){
-        return false;
-    }
-    return creator;
-
-    
-};
+// NOTE : This js file should not contain any database related operations.
+// Those go in db.js or any other database related file.
+// -lead dev | 31 May 2021
 
 
 exports.checkQuizItem = async(data) => {
+    // didn't bother using switch as i don't like them
     if (data.question.length < 10){
         return [false,'Question should be longer than 10 characters'];
     }

@@ -3,6 +3,7 @@ const QuizData = require('./models/quizdata');
 const { resolveSoa } = require('dns');
 
 exports.newCreator = async (creatorObj) => {
+    
 
     let creator = new Creator(creatorObj);
     creator.save()
@@ -17,6 +18,17 @@ exports.newCreator = async (creatorObj) => {
         });
 
 };
+
+exports.removeCreator = async (key) => {
+    let remove = await Creator.deleteMany({key:key});
+
+    return remove;
+
+}
+
+
+
+
 
 exports.createQuiz = async(quizObj) => {
     let quizItem = new QuizData(quizObj);
@@ -34,4 +46,13 @@ exports.createQuiz = async(quizObj) => {
 }
 
 
+exports.checkCreatorKey = async(key) => {
+    let creator = await Creator.findOne({key:key});
+    if (creator == null || creator == undefined){
 
+        return false;
+    };
+      
+    return creator;
+
+};

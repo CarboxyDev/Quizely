@@ -37,6 +37,7 @@ mongoose.connect(DATABASE.url,{useNewUrlParser:true,useUnifiedTopology:true})
 
 const PATH = {
     public:path.join(__dirname,'public'),
+    home:path.join(__dirname,'home'),
     routes:path.join(__dirname,'routes'),
     error404:path.join(__dirname,'404'),
 };
@@ -44,6 +45,7 @@ const PATH = {
 
 app.use(express.json());
 app.use(express.static(PATH.public));
+app.use(express.static(PATH.home));
 app.use(express.static(PATH.error404));
 
 
@@ -56,7 +58,7 @@ const { resolveSoa } = require('dns');
 
 app.post('/create-quiz',async(req,res) => {
     let data = req.body;
-    let checkCreatorKey = await auth.checkCreatorKey(data);
+    let checkCreatorKey = await db.checkCreatorKey(data.key);
     
     if (checkCreatorKey){
         let checkQuiz = await auth.checkQuizItem(data);
@@ -145,25 +147,70 @@ app.get('/creator/new',async (req,res) => {
     console.log('[-] GET : /creator/new');
     let key = req.query.key;
     let author = req.query.author;
-
-    if (key && author){
-        console.log(`New Creator : [+] ${key} : ${author}`);
-        let sendObj = {
-            key:key,
-            creatorName:author
+    let adminPwd = req.query.admin;
+    
+    if (adminPwd == process.env.ADMIN_PWD){
+        if (key && author){
+            let doesKeyExists = await db.checkCreatorKey(key);
+            if (!doesKeyExists){
+                console.log(`[+] New Creator -  ${key} : ${author}`);
+                let sendObj = {
+                    key:key,
+                    creatorName:author
+                }
+                let newCreator = await db.newCreator(sendObj);
+                res.json(sendObj);    
+            }
+            else if (doesKeyExists){
+                res.send('This key already exists');
+            }
+    
         }
-        let newCreator = await db.newCreator(sendObj);
-        sendObj['success'] = newCreator;
-        res.json(sendObj);    
+        else {
+            res.send('Invalid query');
+        }
     }
     else {
-        res.send('Invalid query');
+        res.send('Invalid admin password');
     }
 
 
 });
 
+app.get('/creator/remove', async (req,res) => {
+    console.log('[-] GET : /creator/remove');
+    let key = req.query.key;
+    let adminPwd = req.query.admin;
+    
+    if (adminPwd == process.env.ADMIN_PWD){
+        if (key){
+            let checkCreatorKey = await db.checkCreatorKey(key);
+            let removeKey = await db.removeCreator(key);
+            
+            if (removeKey.deletedCount >= 1){
+                console.log('[+] Removed a creator key from database');
+    
+                res.json({
+                    key:key,
+                    creatorName:checkCreatorKey.creatorName,
+                    count:removeKey.deletedCount,
+                    success:true,
+                    message:'The key was successfully removed from database'                
+                });
+            }
+            else {
+                res.send('That key does not exist');
+            }
+        }
+        else {
+            res.send('Invalid query');
+        }
+    }
+    else {
+        res.send('Invalid admin password');
+    }
 
+});
 
 
 
@@ -196,7 +243,7 @@ app.get('/questions-exhausted',(req,res) => {
 
 
 app.get('/',(req,res) => {
-    res.send('Welcome to Quizly! Site under development<br><br><a href="/create-quiz">Create Quiz</a><br><br><a href="/quiz">Play quiz</a><br>');
+    res.sendFile('home.html',{root:PATH.home});
 
 });
 
