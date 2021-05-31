@@ -24,7 +24,7 @@ submitBtn.addEventListener('click',() => {
     }
 
 
-    let url = '/create-quiz';
+    let url = '/api/quiz/create';
 
     let options = {
         method:'POST',

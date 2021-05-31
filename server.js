@@ -6,10 +6,13 @@ const path = require('path');
 const auth = require('./auth');
 const utils = require('./utils');
 const db = require('./db');
-require('dotenv').config();
+const api = {
+    quiz:require('./api/quiz')
+}
 var server;
+require('dotenv').config();
 
-// implement api router soon ffs.
+// implement api router soon ffs - [done] 
 
 
 const app = express();
@@ -48,100 +51,15 @@ app.use(express.json());
 app.use(express.static(PATH.public));
 app.use(express.static(PATH.home));
 app.use(express.static(PATH.error404));
+// using api router
+app.use('/api/quiz',api.quiz); 
 
 
 
 
-// DATABASE ROUTES
-const QuizData = require('./models/quizdata');
-const { resolveSoa } = require('dns');
-
-
-app.post('/create-quiz',async(req,res) => {
-    let data = req.body;
-    let checkCreatorKey = await db.checkCreatorKey(data.key);
-    
-    if (checkCreatorKey){
-        let checkQuiz = await auth.checkQuizItem(data);
-        if (checkQuiz[0]){
-            data = await auth.alterQuizItem(data);
-            let quizObj = {
-                difficulty:data.difficulty,
-                question:data.question,
-                answer:data.answer,
-                option1:data.option1,
-                option2:data.option2,
-                option3:data.option3,
-                author:checkCreatorKey.creatorName
-            }
-
-            let newQuizItem = db.createQuiz(quizObj);
-            if (newQuizItem){
-                res.json({
-                    'message':'Published submitted quiz item',
-                    'success':true,
-                    'validKey':true
-                });
-            }
-            else if (!newQuizItem){
-                res.json({
-                    'message':'Database error in publishing quiz item',
-                    'success':false,
-                    'validKey':true
-                });
-            }
-
-        }
-        else if (!checkQuiz[0]){
-            let reason = checkQuiz[1];
-            res.send({
-                'message':reason,
-                'success':false,
-                'validKey':true
-            });
-        }
-    }
-    else {
-        console.log('[x][create-quiz] Someone used an invalid creator key');
-        res.json({
-            'message':'Creator key invalid',
-            'success':false,
-            'validKey':false
-        });
-    }
-
-});
 
 
 
-
-app.get('/api/quiz/fetch/:amt',(req,res) => {
-    let amount = parseInt(req.params.amt);
-    
-    if ([5,10,20].includes(amount)){
-
-        console.log(`[-] GET : /fetch/${amount}`);
-        QuizData.countDocuments().exec((error,count) => {
-            let randList = utils.generateRandomList(amount,count);
-            let collections = [];
-            let c = 0;
-            for (x of randList){
-                QuizData.findOne().skip(x).exec((error,data) => {
-                    c++;
-                    collections.push(data);
-                    if (c == amount){
-                    
-                        res.send(collections);
-                    }
-
-                });
-
-            }
-        });
-    }
-
-    
-});
 
 
 app.get('/creator/new',async (req,res) => {
@@ -230,12 +148,6 @@ app.get('/quiz/play',(req,res) => {
     res.sendFile('quiz.html',{root:PATH.public});
     console.log('[-] GET : quiz');
 }); 
-
-app.get('/api/quiz/question-count',(req,res) => {
-    QuizData.countDocuments().exec((error,count) => {
-        res.json({'questionCount':count});
-    });
-});
 
 app.get('/questions-exhausted',(req,res) => {
     res.sendFile('questions-exhausted.html',{root:PATH.public});

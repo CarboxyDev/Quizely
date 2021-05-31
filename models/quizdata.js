@@ -39,7 +39,7 @@ const quizDataSchema = new Schema({
     }
 
 
-},{timestamps:true});
+},{timestamps:false});
 
 
 const QuizData = mongoose.model('quizdata',quizDataSchema);

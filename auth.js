@@ -31,6 +31,14 @@ exports.checkQuizItem = async(data) => {
 
 
 exports.alterQuizItem = async(data) => {
+    if (!data.question.endsWith('?')){
+        if (data.question.endsWith('.') || data.question.endsWith('!')){
+            data.question = data.question.slice(0,-1) + "?";
+        }
+        else {
+            data.question += "?";
+        }
+    }
 
     return data;
 };

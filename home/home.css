@@ -9,6 +9,7 @@
     --orangered : #f75531;
     --blueblack : #17202a;
     --purple : #c22fbf;
+    --pink : #d63472;
 
     --bg-dark : hsl(240, 12%, 11%);
     --input-dark :hsl(240, 13%, 15%);
@@ -120,7 +121,7 @@ body {
 #button-1:hover {
     color:var(--blue);
     background:transparent;
-    border:1px solid var(--blue);
+    border:2px solid var(--blue);
     
 }
 #button-2 {
@@ -129,7 +130,7 @@ body {
 #button-2:hover {
     color:var(--lightgreen);
     background:transparent;
-    border:1px solid var(--lightgreen);
+    border:2px solid var(--lightgreen);
 }
 #button-3 {
     background: var(--purple);
@@ -137,15 +138,15 @@ body {
 #button-3:hover {
     color:var(--purple);
     background:transparent;
-    border:1px solid var(--purple);
+    border:2px solid var(--purple);
 }
 #button-4 {
-    background:var(--orangered);
+    background:var(--pink);
 }
 #button-4:hover {
-    color:var(--orangered);
+    color:var(--pink);
     background:transparent;
-    border:1px solid var(--orangered);
+    border:2px solid var(--pink);
 }
 
 .btn {
