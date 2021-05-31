@@ -238,3 +238,24 @@ input:focus {
 }
 
 /* Sweetalert End */
+
+
+/*
+FOR PC DISPLAY i.e without media queries
+minimum width for proper display  : 1100px
+minimum height for proper display : 480px
+*/
+#warning {
+    display:none;
+}
+
+@media all and (max-width:900px),(max-height:480px){
+    #main {
+        display:none;
+    }
+    #warning{
+        color:#fff;
+        display:block;
+    }
+}
+
