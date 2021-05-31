@@ -163,14 +163,13 @@ body {
 }
 .fa-home {
     color:var(--lightgray);
-    font-size:5vh;
+    font-size:5.75vh;
     position:relative;
-    left:2%;
+    left:3%;
     top:10%;
 }
 .fa-home:hover {
     color:#f06363;
-    font-size:5.25vh;
 }
 
 

@@ -9,6 +9,7 @@ const db = require('./db');
 require('dotenv').config();
 var server;
 
+// implement api router soon ffs.
 
 
 const app = express();
@@ -114,14 +115,14 @@ app.post('/create-quiz',async(req,res) => {
 
 
 
-app.get('/fetch/:amt',(req,res) => {
+app.get('/api/quiz/fetch/:amt',(req,res) => {
     let amount = parseInt(req.params.amt);
     
     if ([5,10,20].includes(amount)){
 
         console.log(`[-] GET : /fetch/${amount}`);
         QuizData.countDocuments().exec((error,count) => {
-            let randList = utils.generateRandomList(5,count);
+            let randList = utils.generateRandomList(amount,count);
             let collections = [];
             let c = 0;
             for (x of randList){
@@ -225,12 +226,12 @@ app.get('/create-quiz',(req,res) => {
     console.log('[-] GET : create');
 });
 
-app.get('/quiz',(req,res) => {
+app.get('/quiz/play',(req,res) => {
     res.sendFile('quiz.html',{root:PATH.public});
     console.log('[-] GET : quiz');
 }); 
 
-app.get('/utils/db-question-count',(req,res) => {
+app.get('/api/quiz/question-count',(req,res) => {
     QuizData.countDocuments().exec((error,count) => {
         res.json({'questionCount':count});
     });

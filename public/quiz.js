@@ -43,7 +43,7 @@ fetchQuestions(5);
 let totalQuestionsInDB;
 function fetchQuestions(amount){
 
-    let url = window.location.pathname.replace('/quiz','/fetch/5');
+    let url = '/api/quiz/fetch/5'
     fetch(url)
         .then(res => res.json())
         .then(data => {
@@ -225,7 +225,7 @@ function resetOptionColors(){
 
 
 function fetchQuestionCount(){
-    let url = window.location.pathname.replace('/quiz','/utils/db-question-count');
+    let url = '/api/quiz/question-count';
     fetch(url)
         .then(res => res.json())
         .then(data => {
@@ -238,7 +238,7 @@ function fetchQuestionCount(){
 
 
 function questionsExhausted(){
-    let url = window.location.pathname.replace('/quiz','/questions-exhausted/');
+    let url = '/questions-exhausted';
     window.location.replace(url);
 }
 
