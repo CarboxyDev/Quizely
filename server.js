@@ -221,7 +221,7 @@ app.get('/creator/remove', async (req,res) => {
 
 
 
-app.get('/create-quiz',(req,res) => {
+app.get('/quiz/create',(req,res) => {
     res.sendFile('create.html',{root:PATH.public});
     console.log('[-] GET : create');
 });

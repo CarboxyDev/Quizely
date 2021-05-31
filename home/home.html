@@ -3,15 +3,60 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Quizely</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Comfortaa&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/home.css">
     </head>
     <body>
         <div id="main">
             <div id="root">
-
+                <div id="container-top"></div>
+                <div id="container-middle">
+                    <div id="container-middle-left">
+                        <div id="container-ml-main">
+                            <div id="title-container">
+                                <span id="title">Quizely</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="container-middle-right">
+                        <div id="container-mr-main">
+                            <div id="container-buttons">
+                                <div class="container-button-main">
+                                    <div class="btn-container">
+                                        <button id="button-1" class="btn" onclick="playQuiz()">Play Quiz</button>
+                                    </div>     
+                                </div>
+                                <div class="container-button-main">
+                                    <div class="btn-container">
+                                        <button id="button-2" class="btn" onclick="info()">Info</button>
+                                    </div>
+                                </div>
+                                <div class="container-button-main">
+                                    <div class="btn-container">
+                                        <button id="button-3" class="btn" onclick="createQuiz()">Create</button>
+                                    </div>
+                                </div>
+                                <div class="container-button-main">
+                                    <div class="btn-container">
+                                        <button id="button-4" class="btn" onclick="customQuiz()">Custom Quiz</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="container-bottom">
+                    <div id="container-copyright">
+                        <footer id="copyright"><!--- Add during production maybe?
+                            <span>© wraithm17 2021. All Rights Reserved</span>
+                        --->
+                        </footer>
+                    </div>
+                </div>
             </div>
         </div>
         <script src="/home.js"></script>
