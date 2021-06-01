@@ -16,7 +16,8 @@
     --pale-red : hsl(0, 66%, 55%);
     --pale-purple : hsl(267, 57%, 42%);
     --pale-orange : hsl(29, 82%, 53%);
-    --yellow : #f5ed06;
+    --yellow : #E5B945;
+    --lightred : #e73535;
 
     --error : hsl(0, 87%, 49%);
     --success : #4BB543;
@@ -108,32 +109,6 @@ body {
 
 
 
-.c-option-1 {
-    border-right:3px solid var(--background-color);
-    border-bottom:3px solid var(--background-color);
-    border-radius:5px;
-}
-.c-option-2 {
-    border-left:3px solid var(--background-color);
-    border-bottom:3px solid var(--background-color);
-    border-radius:5px;
-}
-.c-option-3 {
-    border-right:3px solid var(--background-color);
-    border-top:3px solid var(--background-color);
-    border-radius:5px;
-}
-.c-option-4 {
-    border-left:3px solid var(--background-color);
-    border-top:3px solid var(--background-color);
-    border-radius:5px;
-}
-
-
-
-
-
-
 #question-container {
     height:100%;
 }
@@ -158,9 +133,6 @@ body {
 }
 
 
-#container-top-left {
-
-}
 .fa-home {
     color:var(--lightgray);
     font-size:5.75vh;
@@ -181,23 +153,36 @@ body {
     grid-template-columns: 15% 70% 15%;
 }
 
-#container-middle-center {
-}
-
-
 
 .option-container {
     display:flex;
     align-items: center;
     justify-content: center;
+    border-right:3px solid var(--background-color);
+    border-bottom:3px solid var(--background-color);
+    border-radius:5px;
 }
 
 
 .option {
     font-size:3.25vh;
     font-family: Roboto,Arial, Helvetica, sans-serif;
-    color:var(--light );
+    color:var(--light);
+    
 
+}
+
+.option-correct {
+    background:var(--success) !important;
+}
+.option-correct:hover {
+    background:var(--success) !important;
+}
+.option-wrong {
+    background:var(--error) !important; 
+}
+.option-wrong:hover {
+    background:var(--error) !important;
 }
 
 
@@ -218,9 +203,6 @@ body {
 }
 
 
-#difficulty-container {
-
-}
 #difficulty-badge {
     height:100%;
     width:100%;
@@ -240,19 +222,19 @@ body {
 
 
 #container-option-1:hover {
-    background-color: var(--pale-blue) !important;
+    background-color: var(--pale-blue);
 }
 
 #container-option-2:hover {
-    background-color: var(--pale-red) !important;
+    background-color: var(--pale-red);
 }
 
 #container-option-3:hover {
-    background-color: var(--pale-purple) !important;
+    background-color: var(--pale-purple);
 }
 
 #container-option-4:hover {
-    background-color: var(--pale-orange) !important;
+    background-color: var(--pale-orange);
 }
 
 

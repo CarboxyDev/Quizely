@@ -149,9 +149,9 @@ app.get('/quiz/play',(req,res) => {
     console.log('[-] GET : quiz');
 }); 
 
-app.get('/questions-exhausted',(req,res) => {
-    res.sendFile('questions-exhausted.html',{root:PATH.public});
-    console.log('[-] GET : questions-exhausted');    
+app.get('/quiz/quiz-exhausted',(req,res) => {
+    res.sendFile('quiz-exhausted.html',{root:PATH.public});
+    console.log('[-] GET : quiz-exhausted');    
 });
 
 

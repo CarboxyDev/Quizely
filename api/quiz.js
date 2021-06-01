@@ -7,35 +7,46 @@ const auth = require('../auth');
 const { resolveSoa } = require('dns');
 
 
-router.get('/test',(req,res) => {
+router.get('/test',async(req,res) => {
     res.status(200).json({message:'working'});
-})
+});
 
-router.get('/fetch/:amt',(req,res) => {
+
+
+// keep this router above /fetch/:amt or else the :amt one will always run instead of
+// this as it'll take /all as /:amt.
+
+router.get('/fetch/all',async (req,res) => {
+    let allQuizData = await QuizData.find({});
+    res.send(allQuizData);
+});
+
+
+router.get('/fetch/:amt',async (req,res) => {
+    console.log('/fetch/',req.params.amt);
+    /* Current on hold. Needs to be fully revamped.
+        Start working when all documents size of quizdata becomes +250kb maybe?
+
+    */
+   /*
     let amount = parseInt(req.params.amt);
     if ([5,10,20].includes(amount)){
-        QuizData.countDocuments().exec((error,count) => {
-            let randList = utils.generateRandomList(amount,count);
-            let collections = [];
-            let c = 0;
-            for (x of randList){
-                QuizData.findOne().skip(x).exec((error,data) => {
-                    c++;
-                    collections.push(data);
-                    if (c == amount){
-                        res.send(collections);
-                    }
-                });
-            }
-        });
-    }
+        let questionCount = await db.questionCount();
+        let randList = utils.generateRandomList(amount,questionCount);
+        for (x of randList){
+
+
+        }
+
+    };
+    */
 });
 
 
-router.get('/question-count',(req,res) => {
-    QuizData.countDocuments().exec((error,count) => {
-        res.json({'questionCount':count});
-    });
+
+router.get('/question-count',async (req,res) => {
+    let count = await db.questionCount();
+    res.json({'questionCount':count});
 });
 
 
@@ -45,7 +56,9 @@ router.get('/question-count',(req,res) => {
 
 
 
-
+// POST POST POST POST POST POST POST POST POST POST POST
+// POST POST POST POST POST POST POST POST POST POST POST
+// POST POST POST POST POST POST POST POST POST POST POST
 
 router.post('/create',async(req,res) => {
     let data = req.body;

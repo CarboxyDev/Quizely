@@ -52,7 +52,17 @@ exports.checkCreatorKey = async(key) => {
 
         return false;
     };
-      
     return creator;
-
 };
+
+// or maybe just count the questions once every hour and store in a variable?
+// will save the request from client for the amount
+// of questions or any server side use
+exports.questionCount = async() => {
+    let docsCount = await QuizData.countDocuments();
+    if (docsCount == null || docsCount == undefined){
+        return null;
+    }
+    return docsCount;
+}
+

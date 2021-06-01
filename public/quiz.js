@@ -33,24 +33,35 @@ homeBtn.addEventListener('click',() => {
 });
 
 fetchQuestionCount();
-fetchQuestions(5);
-
+//fetchQuestions(5);
+fetchAllQuestions();
 
 
 
 
 
 let totalQuestionsInDB;
+/*
 function fetchQuestions(amount){
 
-    let url = '/api/quiz/fetch/5'
+    let url = '/api/quiz/fetch/'+amount;
     fetch(url)
         .then(res => res.json())
         .then(data => {
             QUESTIONDATA = data;
             loadQuestions();
         });
+}
+*/
 
+function fetchAllQuestions(){
+    let url = '/api/quiz/fetch/all';
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            QUESTIONDATA = data;
+            loadQuestions();
+        })
 }
 
 
@@ -86,7 +97,7 @@ function loadQuestions(){
     quiz.question.innerText = currentQuestion.question;
     quiz.difficulty.innerText = currentQuestion.difficulty;
     displayDifficulty(currentQuestion.difficulty);
-    
+
     let optionsList = [
         currentQuestion.answer,
         currentQuestion.option1,currentQuestion.option2,
@@ -193,9 +204,6 @@ function disableOnclickEvents(){
     container.option2.onclick = "";
     container.option3.onclick = "";
     container.option4.onclick = "";
-
-
-
 }
 
 
@@ -229,8 +237,8 @@ function fetchQuestionCount(){
     fetch(url)
         .then(res => res.json())
         .then(data => {
-            totalQuestionsInDB = data.questionCount;
-            console.log('[DATABASE] Total questions : ',totalQuestionsInDB); 
+            console.log('[DATABASE] Total questions : ',data.questionCount);
+            return data.questionCount; 
         });
 }
 
