@@ -159,6 +159,7 @@ function fetchAllQuestions(){
             DATA.questionCount = data.length;
             console.log('[CLIENT] Fetched questions from database');
             console.log(`Questions Fetched Amount : ${DATA.questionCount}`);
+            quizLayout();
             generateQuestion();
         })
 }
@@ -169,6 +170,13 @@ document.addEventListener('DOMContentLoaded',() => {
 });
 
 
+function quizLayout(){
+    let root = document.querySelector('#root');
+    let containerLoader = document.querySelector('#container-loader');
+    containerLoader.style.display = 'none';
+    root.style.display = 'grid';
+    
+}
 
 function exhaustedQuiz(){
     window.location.replace('/quiz/quiz-exhausted');
