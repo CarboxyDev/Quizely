@@ -132,8 +132,44 @@ app.get('/creator/remove', async (req,res) => {
 });
 
 
+// query based editing of quiz items
+// maybe add an actual page/interface for doing this stuff huh?
+app.get('/quiz/edit',async (req,res) => {
+    if (req.query.admin == process.env.ADMIN_PWD){
+        if (req.query.id){
+            let id = req.query.id;
+            delete req.query.admin;
+            delete req.query.id;
+            for (x of Object.keys(req.query)){
+                let prop = x;
+                let editQuiz = await db.editQuiz(id,prop,req.query[x]);
+                res.json(editQuiz);
+            }
+        }
+        else {
+            res.send('Invalid question id');
+        }
+    }
+    else {
+        res.send('Invalid admin password');
+    }
+});
 
 
+app.get('/quiz/delete',async (req,res) => {
+    if (req.query.admin){
+        if (req.query.id){
+            let deleteQuiz = await db.deleteQuiz(req.query.id);
+            res.json(deleteQuiz);
+        }
+        else {
+            res.send('Invalid question id');
+        }
+    }
+    else {
+        res.send('Invalid admin password');
+    }
+});
 
 
 
@@ -148,6 +184,8 @@ app.get('/quiz/play',(req,res) => {
     res.sendFile('quiz.html',{root:PATH.public});
     console.log('[-] GET : quiz');
 }); 
+
+
 
 app.get('/quiz/quiz-exhausted',(req,res) => {
     res.sendFile('quiz-exhausted.html',{root:PATH.public});

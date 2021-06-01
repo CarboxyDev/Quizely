@@ -57,6 +57,7 @@ function generateQuestion(){
 
 
 function displayQuestion(currentQuestion){
+    console.log('Current Question ID : '+currentQuestion['_id']);
     quiz.question.innerText = currentQuestion.question;
 
     let options = [
