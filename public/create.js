@@ -82,7 +82,7 @@ function adjustDifficultyInput(diff){
     }
     if (diff == 'Tough'){
         diff = 'Hard'
-  s  }
+    }
     if (diff == 'E'){
         diff = 'Easy';
     }

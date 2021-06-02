@@ -164,7 +164,7 @@ function fetchAllQuestions(){
                 generateQuestion();
                 quizLayout();
                 clearInterval(delay);
-            },4000)
+            },4250)
 
             
         })
