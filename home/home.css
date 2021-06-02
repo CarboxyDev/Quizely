@@ -77,11 +77,6 @@ body {
     justify-content: center;
 }
 
-
-#title-container {
-    
-}
-
 #title {
     font-size:6rem;
     color:var(--light);
@@ -92,9 +87,7 @@ body {
     height:80%;
     width:40%;
     display:grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-
-    
+    grid-template-rows: 1fr 1fr 1fr 1fr;    
 }
 
 .container-button-main {
@@ -180,22 +173,8 @@ input:focus {
 
 
 
-/*
-FOR PC DISPLAY i.e without media queries
-minimum width for proper display  : 1100px
-minimum height for proper display : 480px
-*/
+
 #warning {
     display:none;
-}
-
-@media all and (max-width:900px),(max-height:480px){
-    #main {
-        display:none;
-    }
-    #warning{
-        color:#fff;
-        display:block;
-    }
 }
 

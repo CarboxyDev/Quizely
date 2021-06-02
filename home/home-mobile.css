@@ -1,0 +1,30 @@
+
+/* Phone media query */
+
+@media only screen and (max-width:480px){
+    #main {
+        font-size:8px;
+    }
+    #root {
+        display:grid;
+        grid-template-rows: 5% 90% 5%;
+    }
+    #container-middle {
+        display:grid;
+        grid-template-columns: none;
+        grid-template-rows: 20% 80%;
+    }
+
+    #title {
+        font-size:3rem;
+    }
+    #container-mr-main {
+        align-items:flex-end;
+    }
+    #container-buttons {
+        height:80%;
+        width:80%;
+        display:grid;
+        grid-template-rows: 1fr 1fr 1fr 1fr;  
+    }
+}
