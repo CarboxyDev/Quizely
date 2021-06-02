@@ -12,19 +12,24 @@
     #container-middle {
         display:grid;
         grid-template-columns: none;
-        grid-template-rows: 20% 80%;
+        grid-template-rows: 25% 75%;
     }
 
     #title {
-        font-size:3rem;
+        font-size:3.25rem;
     }
-    #container-mr-main {
-        align-items:flex-end;
-    }
+
     #container-buttons {
-        height:80%;
+        height:75%;
         width:80%;
         display:grid;
         grid-template-rows: 1fr 1fr 1fr 1fr;  
+    }
+    
+    .container-button-main {
+
+    }
+    .btn-container {
+        height:60%;
     }
 }
