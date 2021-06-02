@@ -160,8 +160,13 @@ function fetchAllQuestions(){
             DATA.questionCount = data.length;
             console.log('[CLIENT] Fetched questions from database');
             console.log(`Questions Fetched Amount : ${DATA.questionCount}`);
-            quizLayout();
-            generateQuestion();
+            let delay = setInterval(() => {
+                generateQuestion();
+                quizLayout();
+                clearInterval(delay);
+            },4000)
+
+            
         })
 }
 

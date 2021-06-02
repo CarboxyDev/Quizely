@@ -12,7 +12,10 @@ let input = {
 
 
 submitBtn.addEventListener('click',() => {
+    submitQuiz();
+});
 
+function submitQuiz(){
     let sendData = {
         question:input.question.value,
         answer:input.answer.value,
@@ -23,9 +26,7 @@ submitBtn.addEventListener('click',() => {
         key:input.key.value
     }
 
-
     let url = '/api/quiz/create';
-
     let options = {
         method:'POST',
         body: JSON.stringify(sendData),
@@ -33,9 +34,6 @@ submitBtn.addEventListener('click',() => {
             "Content-type": "application/json; charset=UTF-8"
         },
     };
-
-
-
     fetch(url,options)
         .then(res => res.json())
         .then(data => {
@@ -60,9 +58,10 @@ submitBtn.addEventListener('click',() => {
             console.log('ERROR : '+error);
             alertUser('Error in sending POST request',success=false);
         });
-    
 
-});
+}
+
+
 
 
 function clearInputs(){
@@ -205,10 +204,14 @@ function shiftFocus(){
 
 document.addEventListener('keyup',(e) => {
     e.preventDefault();
-    // 13 ---> ENTER KEY
-    if (e.key === 'Enter'){ 
+
+    if (e.key === 'Enter' && e.shiftKey){
+        submitQuiz();
+    }   
+    else if (e.key === 'Enter'){ 
         shiftFocus();
-    };
+    }
+
 });
 
 

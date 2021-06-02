@@ -16,6 +16,7 @@ router.get('/test',async(req,res) => {
 // keep this router above /fetch/:amt or else the :amt one will always run instead of
 // this as it'll take /all as /:amt.
 
+// 1 quiz question object takes 0.22 kb space on average
 router.get('/fetch/all',async (req,res) => {
     let allQuizData = await QuizData.find({});
     res.send(allQuizData);
