@@ -55,6 +55,16 @@ body {
 #container-top {
     height:100%;
     width:100%;
+    display:grid;
+    grid-template-columns: 15% 70% 15%;
+}
+
+
+#container-middle {
+    height:100%;
+    width:100%;
+    display:grid;
+    grid-template-columns:15% 70% 15%;
 }
 
 
@@ -69,21 +79,21 @@ body {
     position: relative;
     left:15%;
     display: grid;
-    grid-template-rows: 50% 50%;
+    grid-template-rows: 1fr 1fr;
 }
 
 #container-options-top {
     height:100%;
     width:100%;
     display:grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 1fr 1fr;
 }
 
 #container-options-bottom {
     height:100%;
     width:100%;
     display:grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 1fr 1fr;
 }
 
 
@@ -124,19 +134,9 @@ body {
     top:5%;
 }
 
-
-
-#container-top {
-    height:100%;
-    width:100%;
-    display:grid;
-    grid-template-columns: 15% 70% 15%;
-}
-
-
 .fa-home {
     color:var(--lightgray);
-    font-size:5.75vh;
+    font-size:2em;
     position:relative;
     left:3%;
     top:10%;
@@ -145,14 +145,6 @@ body {
     color:#f06363;
 }
 
-
-
-#container-middle {
-    height:100%;
-    width:100%;
-    display:grid;
-    grid-template-columns: 15% 70% 15%;
-}
 
 
 .option-container {
@@ -378,28 +370,8 @@ Thanks to Nobuaki Honma (@RBV912)
 }
 
 
-
-
-
-
-
-/*
-FOR PC DISPLAY i.e without media queries
-minimum width for proper display  : 1100px
-minimum height for proper display : 480px
-*/
 #warning {
     display:none;
-}
-
-@media all and (max-width:900px),(max-height:480px){
-    #main {
-        display:none;
-    }
-    #warning{
-        color:#fff;
-        display:block;
-    }
 }
 
 

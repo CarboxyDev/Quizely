@@ -1,6 +1,5 @@
 
 /* Phone media query */
-
 @media only screen and (max-width:480px){
     #main {
         font-size:8px;
@@ -31,5 +30,17 @@
     }
     .btn-container {
         height:60%;
+    }
+}
+
+/* tablet not supported as of now*/
+
+@media only screen and (max-width:1000px) and (min-width:481px){
+    #main {
+        display:none;
+    }
+    #warning{
+        color:#fff;
+        display:block;
     }
 }

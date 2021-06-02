@@ -1,0 +1,48 @@
+
+/* Phone media query */
+@media only screen and (max-width:480px){
+    #main {
+        font-size:8px;
+    }
+    #root {
+        grid-template-rows:10% 30% 60%;
+    }
+    #container-middle {
+        grid-template-columns:7.5% 85% 7.5%;
+    }
+    #container-mc-top {
+        grid-template-columns: 75% 25%;
+    }
+    #container-options {
+        height:95%;
+        width:85%;
+        position: relative;
+        left:7.5%;
+    }
+    #container-options-top {
+        grid-template-columns: none;
+        grid-template-rows:1fr 1fr;
+    }
+    #container-options-bottom {
+        grid-template-columns: none;
+        grid-template-rows:1fr 1fr;
+
+    }
+
+    .fa-home {
+        font-size:3em;
+    }
+
+}
+
+/* tablet not supported as of now*/
+
+@media only screen and (max-width:1000px) and (min-width:480px){
+    #main {
+        display:none;
+    }
+    #warning{
+        color:#fff;
+        display:block;
+    }
+}
