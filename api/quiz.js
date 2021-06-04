@@ -46,8 +46,10 @@ router.get('/fetch/:amt',async (req,res) => {
 
 
 router.get('/question-count',async (req,res) => {
+    console.log('[API] quiz -> question-count');
     let count = await db.questionCount();
     res.json({'questionCount':count});
+    
 });
 
 

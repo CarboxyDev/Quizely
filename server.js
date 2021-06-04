@@ -192,6 +192,11 @@ app.get('/quiz/quiz-exhausted',(req,res) => {
     console.log('[-] GET : quiz-exhausted');    
 });
 
+app.get('/info',(req,res) => {
+    res.sendFile('info.html',{root:PATH.public});
+    console.log('[-] GET : info');
+})
+
 
 app.get('/',(req,res) => {
     res.sendFile('home.html',{root:PATH.home});

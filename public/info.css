@@ -1,0 +1,92 @@
+:root {
+    --light : #eff5f5;
+    --lightgray : #ccd5d7;
+    --dark : #0c0b0b;
+    --lightblue: #6495ED;
+    --periwinkle : #CCCCFF;
+    --lightgreen : #2ecc71;
+    --orangered : #FF5733;
+    --blueblack : #17202a;
+    --background-color :  hsl(240, 12%, 11%);
+    --blue : hsl(210, 62%, 44%);
+    --red : hsl(0, 66%, 51%);
+    --purple : hsl(267, 57%, 38%);
+    --orange : hsl(29, 82%, 49%);
+    --pale-blue : hsl(210, 62%, 48%);
+    --pale-red : hsl(0, 66%, 55%);
+    --pale-purple : hsl(267, 57%, 42%);
+    --pale-orange : hsl(29, 82%, 53%);
+    --yellow : #E5B945;
+    --lightred : #e73535;
+}
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    border:none;
+}
+
+body {
+    background:var(--background-color);
+    height:100vh;
+    width:100vw;
+}
+
+#main {
+    height:100%;
+    width:100%;
+
+}
+#root {
+    height:100%;
+    width:100%;
+    display:grid;
+    grid-template-rows:20% 70% 10%;
+}
+
+#container-top {
+    width:100%;
+    height:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#page-title {
+    font-size:3.5em;
+    font-family: Roboto,Arial, Helvetica, sans-serif;
+    color:var(--lightgreen);
+}
+
+#container-middle {
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content: center;
+}
+#container-bottom {
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#container-content-1 {
+    font-size:1.25em;
+    color:var(--light);
+    font-family: Ubuntu,Arial, Helvetica, sans-serif;
+}
+
+
+#bottom-label {
+    font-size:1.15em;
+    font-family: Roboto,Arial, Helvetica, sans-serif;
+    color:var(--lightgray);
+}
+.fa-heart {
+    color:var(--lightred);
+}
