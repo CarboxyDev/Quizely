@@ -1,7 +1,5 @@
 // NOTE : This js file should not contain any database related operations.
 // Those go in db.js or any other database related file.
-// -lead dev | 31 May 2021
-
 
 exports.checkQuizItem = async(data) => {
     // didn't bother using switch as i don't like them
@@ -29,8 +27,8 @@ exports.checkQuizItem = async(data) => {
 
 };
 
-
-exports.alterQuizItem = async(data) => {
+// Formats the quiz item 
+exports.formatQuizItem = async(data) => {
     if (!data.question.endsWith('?')){
         if (data.question.endsWith('.') || data.question.endsWith('!')){
             data.question = data.question.slice(0,-1) + "?";

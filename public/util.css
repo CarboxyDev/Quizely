@@ -1,0 +1,34 @@
+.occupy-full {
+    height:100%;
+    width:100%;
+}
+
+.flex {
+    display:flex;
+}
+.flex-row {
+    flex-direction:column;
+}
+.flex-column {
+    flex-direction: row;
+}
+.flex-v-center {
+    align-items:center;
+}
+.flex-h-center {
+    justify-content: center;
+}
+.flex-center {
+    align-items:center;
+    justify-content: center;
+}
+
+.border-circle {
+    border-radius: 50%;
+}
+
+.bg-image-fix {
+    background-position: center center;
+    background-size:cover;
+    background-repeat: no-repeat;
+}
