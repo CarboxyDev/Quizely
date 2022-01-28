@@ -1,5 +1,3 @@
-console.log('[+] Running server.js');
-
 const express = require('express');
 const mongoose = require('mongoose');
 const {v4:uuid} = require('uuid');
@@ -14,12 +12,8 @@ const api = {
 var server;
 require('dotenv').config();
 
-
-
-
 const app = express();
 const PORT = process.env.PORT || 3000;
-
 
 const DATABASE = {
     url:process.env.DB_URL

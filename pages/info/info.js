@@ -1,21 +1,3 @@
-questionCount();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function questionCount(){
     let url = '/api/quiz/question-count';
     fetch(url)
@@ -27,5 +9,8 @@ function questionCount(){
         })
 }
 
+function home(){
+    window.location.replace('/');
+}
 
-
+questionCount();

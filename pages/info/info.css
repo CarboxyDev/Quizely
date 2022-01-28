@@ -90,3 +90,16 @@ body {
 .fa-heart {
     color:var(--lightred);
 }
+
+.fa-home {
+    color: var(--lightgray);
+    font-size: 2em;
+    /* temporary fix! */
+    position: absolute;
+    left:1%;
+    top:2.5%;
+}
+
+.fa-home:hover {
+    color: #f06363;
+}
